@@ -3,9 +3,37 @@ import numpy as np
 import tensorflow as tf
 import joblib
 
+
+st.markdown("""
+    <style>
+        .stApp {
+            background-color: #000000;
+        }
+        .stTextInput, .stNumberInput, .stButton {
+            background-color: #1a1a1a;
+            color: white;
+        }
+        .stButton:hover {
+            background-color: #FFD700;
+            color: black;
+        }
+        .css-1d391kg {
+            color: white;
+        }
+        .stTitle {
+            color: #FFD700;
+        }
+        .stSidebar {
+            background-color: #1a1a1a;
+        }
+        .stSidebar .stTextInput, .stSidebar .stNumberInput {
+            background-color: #1a1a1a;
+            color: white;
+        }
+    </style>
+""", unsafe_allow_html=True)
 # Load model without compiling to avoid 'mse' deserialization issue
 model = tf.keras.models.load_model("bra_model_classified.h5", compile=False)
-
 # Load scaler and mappings
 scaler = joblib.load("scaler.pkl")
 band_mapping = joblib.load("band_mapping.pkl")  # idx_to_band
