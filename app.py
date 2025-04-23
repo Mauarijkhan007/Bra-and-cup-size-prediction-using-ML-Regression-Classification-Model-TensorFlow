@@ -4,6 +4,23 @@ import tensorflow as tf
 import joblib
 st.markdown("""
     <style>
+    /* Title styling with badge */
+    .title-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .badge {
+        background-color: #ffb900;
+        color: black;
+        padding: 0.25em 0.75em;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    /* Predict button styling */
     .stButton>button {
         background-color: #ffb900;
         color: black;
@@ -12,29 +29,33 @@ st.markdown("""
         border-radius: 5px;
     }
 
+    .stButton>button:active {
+        background-color: #ffb900 !important;
+        color: black !important;
+    }
+
     .stButton>button:hover {
-        background-color: #e0a800;
+        background-color: #e6a700;
         color: black;
     }
 
+    /* Custom success styling */
     .stSuccess {
-        background-color: #222 !important;
-        color: #ffb900 !important;
+        background-color: #ffb900 !important;
+        color: black !important;
         font-weight: bold;
         padding: 1em;
         border-radius: 10px;
     }
 
+    /* Input fields dark style */
     input, .stNumberInput input {
         background-color: #1e1e1e !important;
         color: white !important;
     }
-
-    .stTextInput>div>div>input {
-        color: white !important;
-    }
     </style>
 """, unsafe_allow_html=True)
+
 
 # Load model without compiling to avoid 'mse' deserialization issue
 model = tf.keras.models.load_model("bra_model_classified.h5", compile=False)
@@ -46,6 +67,12 @@ idx_to_band = band_mapping
 
 # Cup size numeric to letter mapping
 cup_letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'DD', 6: 'E', 7: 'F'}
+st.markdown("""
+    <div class="title-container">
+        <h1 style="color: white; margin: 0;">Bra Size</h1>
+        <div class="badge">Predictor</div>
+    </div>
+""", unsafe_allow_html=True)
 
 # Streamlit interface
 st.title("Bra Size Predictor")
