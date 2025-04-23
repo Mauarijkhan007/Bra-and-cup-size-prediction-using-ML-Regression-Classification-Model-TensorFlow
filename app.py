@@ -89,7 +89,7 @@ cup_letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'DD', 6: 'E', 7: 'F'}
 # Streamlit interface
 
 # Input form
-height = st.number_input("Height (cm)", min_value=50, max_value=250, value=165)
+height = st.number_input("Height (cm)", min_value=100, max_value=250, value=165)
 weight = st.number_input("Weight (kg)", min_value=30, max_value=200, value=60)
 body_fat = st.number_input("Body Fat %", min_value=15.0, max_value=75.0, value=25.0)
 
@@ -102,7 +102,7 @@ if st.button("Predict"):
     band_probs, cup_pred = model.predict(input_scaled)
     band_class = np.argmax(band_probs[0])
     band_size = idx_to_band.get(band_class, "Unknown Band")
-    cup_numeric = round(cup_pred[0][0])
+    cup_numeric = max(1, min(7, round(cup_pred[0][0])))
     cup_letter = cup_letters.get(cup_numeric, f"Unknown({cup_numeric})")
 
     # Display result
