@@ -28,17 +28,18 @@ st.markdown("""
     }
 
     /* Predict button style */
-    .stButton>button {
-        background-color: #ffb900;
-        color: black;
+        .stButton>button {
+        background-color: #ffb900 !important;
+        color: black !important;
         border: none;
         padding: 0.6em 1.2em;
         font-weight: bold;
         border-radius: 6px;
+        transition: background-color 0.2s ease;
     }
 
     .stButton>button:active {
-        background-color: #ffb900 !important;
+        background-color: #e6a700 !important;
         color: black !important;
     }
 
@@ -105,4 +106,16 @@ if st.button("Predict"):
     cup_letter = cup_letters.get(cup_numeric, f"Unknown({cup_numeric})")
 
     # Display result
-    st.success(f"Predicted Bra Size: {band_size}{cup_letter}")
+        # Custom styled success message (yellow box with black text)
+    st.markdown(f"""
+        <div style='
+            background-color: #ffb900;
+            color: black;
+            padding: 1em;
+            border-radius: 0.5em;
+            font-weight: bold;
+            margin-top: 1em;
+        '>
+            Predicted Bra Size: {band_size}{cup_letter}
+        </div>
+    """, unsafe_allow_html=True)
