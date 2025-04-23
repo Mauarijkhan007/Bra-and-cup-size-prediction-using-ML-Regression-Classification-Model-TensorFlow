@@ -91,7 +91,7 @@ cup_letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'DD', 6: 'E', 7: 'F'}
 # Input form
 height = st.number_input("Height (cm)", min_value=50, max_value=250, value=165)
 weight = st.number_input("Weight (kg)", min_value=30, max_value=200, value=60)
-body_fat = st.number_input("Body Fat %", min_value=1.0, max_value=75.0, value=25.0)
+body_fat = st.number_input("Body Fat %", min_value=15.0, max_value=75.0, value=25.0)
 
 if st.button("Predict"):
     # Prepare and scale input
