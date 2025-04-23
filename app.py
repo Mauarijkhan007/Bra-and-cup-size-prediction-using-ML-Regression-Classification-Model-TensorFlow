@@ -106,7 +106,7 @@ if st.button("Predict"):
     cup_letter = cup_letters.get(cup_numeric, f"Unknown({cup_numeric})")
 
     # Display result
-  st.markdown(f"""
+    st.markdown(f"""
     <div style='
         background-color: rgba(255, 185, 0, 0.2);
         color: black;
