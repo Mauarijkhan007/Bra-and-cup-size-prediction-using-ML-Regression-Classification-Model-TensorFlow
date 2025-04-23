@@ -108,11 +108,10 @@ if st.button("Predict"):
     # Display result
     st.markdown(f"""
     <div style='
-        background-color: rgba(255, 185, 0, 0.2);
+        background-color: #ffb900;
         color: black;
         padding: 1em;
         border-radius: 0.5em;
-        font-weight: bold;
         margin-top: 1em;
     '>
         Predicted Bra Size: {band_size}{cup_letter}
