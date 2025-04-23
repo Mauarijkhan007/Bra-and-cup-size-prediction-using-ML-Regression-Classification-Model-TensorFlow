@@ -130,6 +130,8 @@ Cup Size Evaluation:
 Mean Absolute Error (MAE): 0.158273383975029
 Mean Squared Error (MSE): 0.158273383975029
 ---
+## Launched at :https://ml-model-no1-by-mojo.streamlit.app/
+---
 ## 🧠 Author
 
 **Mauarij Khan** (a.k.a Mojo)  
