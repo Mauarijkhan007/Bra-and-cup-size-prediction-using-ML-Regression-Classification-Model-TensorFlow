@@ -2,6 +2,39 @@ import streamlit as st
 import numpy as np
 import tensorflow as tf
 import joblib
+st.markdown("""
+    <style>
+    .stButton>button {
+        background-color: #ffb900;
+        color: black;
+        border: none;
+        padding: 0.5em 1em;
+        border-radius: 5px;
+    }
+
+    .stButton>button:hover {
+        background-color: #e0a800;
+        color: black;
+    }
+
+    .stSuccess {
+        background-color: #222 !important;
+        color: #ffb900 !important;
+        font-weight: bold;
+        padding: 1em;
+        border-radius: 10px;
+    }
+
+    input, .stNumberInput input {
+        background-color: #1e1e1e !important;
+        color: white !important;
+    }
+
+    .stTextInput>div>div>input {
+        color: white !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # Load model without compiling to avoid 'mse' deserialization issue
 model = tf.keras.models.load_model("bra_model_classified.h5", compile=False)
