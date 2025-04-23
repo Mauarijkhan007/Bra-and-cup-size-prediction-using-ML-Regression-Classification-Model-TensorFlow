@@ -1,17 +1,17 @@
-import joblib
-import tensorflow as tf
 import streamlit as st
+import tensorflow as tf
 import numpy as np
+import joblib
 
-# Load model and scaler
+# Load the trained model, scaler, and mappings
 model = tf.keras.models.load_model("bra_model_classified.h5")
-
-# Ensure the model is compiled after loading
-model.compile(optimizer='adam', loss='mean_squared_error', metrics=['mae'])
-
 scaler = joblib.load("scaler.pkl")
 band_mapping = joblib.load("band_mapping.pkl")
 cup_mapping = joblib.load("cup_mapping.pkl")
+
+# Ensure the model is compiled
+model.compile(optimizer='adam', loss={'band_output': 'sparse_categorical_crossentropy', 'cup_output': 'mse'},
+              metrics={'band_output': 'accuracy', 'cup_output': 'mae'})
 
 # Streamlit app interface
 st.title("Bra Size Prediction")
@@ -30,15 +30,16 @@ if st.button("Predict Bra Size"):
     input_data_scaled = scaler.transform(input_data)
     
     # Make predictions using the model
-    band_pred, cup_pred = model.predict(input_data_scaled)
+    band_pred_probs, cup_pred = model.predict(input_data_scaled)
     
     # Post-process the predictions
-    band_pred = round(band_pred[0][0])
+    band_pred = np.argmax(band_pred_probs, axis=1)[0]
     cup_pred = round(cup_pred[0][0])
     
-    # Display predictions
+    # Convert predictions to actual sizes
     band_size = band_mapping.get(band_pred, "Unknown Band Size")
     cup_size = cup_mapping.get(cup_pred, "Unknown Cup Size")
     
+    # Display predictions
     st.write(f"Predicted Band Size: {band_size}")
     st.write(f"Predicted Cup Size: {cup_size}")
