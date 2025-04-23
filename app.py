@@ -106,8 +106,7 @@ if st.button("Predict"):
     cup_letter = cup_letters.get(cup_numeric, f"Unknown({cup_numeric})")
 
     # Display result
-        # Custom styled success message (yellow box with black text)
-   st.markdown(f"""
+  st.markdown(f"""
     <div style='
         background-color: rgba(255, 185, 0, 0.2);
         color: black;
@@ -119,4 +118,5 @@ if st.button("Predict"):
         Predicted Bra Size: {band_size}{cup_letter}
     </div>
 """, unsafe_allow_html=True)
+
 
