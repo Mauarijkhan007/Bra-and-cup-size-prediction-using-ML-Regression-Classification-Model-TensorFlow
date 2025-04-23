@@ -48,7 +48,7 @@ st.title("Bra Size Prediction")
 height = st.number_input("Height (cm)", min_value=50, max_value=250, value=170)
 weight = st.number_input("Weight (kg)", min_value=30, max_value=200, value=60)
 body_fat = st.number_input("Body Fat Percentage", min_value=0.0, max_value=100.0, value=25.0)
-
+cup_letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'DD', 6: 'E', 7: 'F'}
 # Predict when user clicks the button
 if st.button("Predict Bra Size"):
     # Prepare input features for prediction
@@ -68,5 +68,4 @@ if st.button("Predict Bra Size"):
     band_size = idx_to_band.get(band_pred, "Unknown Band Size")
     cup_size = cup_pred  # You can map this to letter sizes if needed
     
-    st.write(f"Predicted Band Size: {band_size}")
-    st.write(f"Predicted Cup Size: {cup_size}")
+    st.success(f"Predicted Bra Size: {band_size}{cup_letter}")
