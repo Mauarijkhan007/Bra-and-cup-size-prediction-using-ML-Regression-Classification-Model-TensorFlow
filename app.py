@@ -2,31 +2,39 @@ import streamlit as st
 import numpy as np
 import tensorflow as tf
 import joblib
+# Custom CSS
 st.markdown("""
     <style>
-    /* Title styling with badge */
-    .title-container {
+    /* Custom font and layout for the Pornhub-style logo */
+    .logo-container {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        font-size: 2.5em;
+        font-weight: 800;
+        font-family: sans-serif;
+        margin-bottom: 20px;
     }
 
-    .badge {
+    .logo-text {
+        color: white;
+        margin-right: 10px;
+    }
+
+    .logo-highlight {
         background-color: #ffb900;
         color: black;
-        padding: 0.25em 0.75em;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 1.1em;
+        padding: 0.1em 0.5em;
+        border-radius: 0.3em;
     }
 
-    /* Predict button styling */
+    /* Predict button style */
     .stButton>button {
         background-color: #ffb900;
         color: black;
         border: none;
-        padding: 0.5em 1em;
-        border-radius: 5px;
+        padding: 0.6em 1.2em;
+        font-weight: bold;
+        border-radius: 6px;
     }
 
     .stButton>button:active {
@@ -35,26 +43,35 @@ st.markdown("""
     }
 
     .stButton>button:hover {
-        background-color: #e6a700;
-        color: black;
-    }
-
-    /* Custom success styling */
-    .stSuccess {
-        background-color: #ffb900 !important;
+        background-color: #e6a700 !important;
         color: black !important;
-        font-weight: bold;
-        padding: 1em;
-        border-radius: 10px;
     }
 
-    /* Input fields dark style */
+    /* Input dark style */
     input, .stNumberInput input {
         background-color: #1e1e1e !important;
         color: white !important;
     }
+
+    /* Custom success box override */
+    div.stAlert.success {
+        background-color: #ffb900 !important;
+        color: black !important;
+        border-left: 0.25rem solid black !important;
+        font-weight: bold;
+        border-radius: 0.5em;
+    }
     </style>
 """, unsafe_allow_html=True)
+
+# Pornhub-style logo
+st.markdown("""
+    <div class="logo-container">
+        <div class="logo-text">Bra Size</div>
+        <div class="logo-highlight">Predictor</div>
+    </div>
+""", unsafe_allow_html=True)
+
 
 
 # Load model without compiling to avoid 'mse' deserialization issue
@@ -67,15 +84,8 @@ idx_to_band = band_mapping
 
 # Cup size numeric to letter mapping
 cup_letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'DD', 6: 'E', 7: 'F'}
-st.markdown("""
-    <div class="title-container">
-        <h1 style="color: white; margin: 0;">Bra Size</h1>
-        <div class="badge">Predictor</div>
-    </div>
-""", unsafe_allow_html=True)
 
 # Streamlit interface
-st.title("Bra Size Predictor")
 
 # Input form
 height = st.number_input("Height (cm)", min_value=50, max_value=250, value=165)
