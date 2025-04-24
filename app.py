@@ -2,6 +2,8 @@ import streamlit as st
 import numpy as np
 import tensorflow as tf
 import joblib
+import pandas as pd
+import os
 # Custom CSS
 st.markdown("""
     <style>
@@ -119,4 +121,18 @@ if st.button("Predict"):
     </div>
 """, unsafe_allow_html=True)
 
+# Save input and prediction to CSV
+    log_data = {
+        "Height_cm": [height],
+        "Weight_kg": [weight],
+        "Body_Fat_%": [body_fat],
+        "Predicted_Band": [band_size],
+        "Predicted_Cup": [cup_size]
+    }
 
+    log_df = pd.DataFrame(log_data)
+
+    if os.path.exists("user_logs.csv"):
+        log_df.to_csv("user_logs.csv", mode='a', header=False, index=False)
+    else:
+        log_df.to_csv("user_logs.csv", mode='w', header=True, index=False)
