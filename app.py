@@ -127,7 +127,7 @@ if st.button("Predict"):
         "Weight_kg": [weight],
         "Body_Fat_%": [body_fat],
         "Predicted_Band": [band_size],
-        "Predicted_Cup": [cup_size]
+        "Predicted_Cup": [cup_letter]
     }
 
     log_df = pd.DataFrame(log_data)
