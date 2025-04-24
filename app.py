@@ -103,15 +103,9 @@ if st.button("Predict"):
     band_class = np.argmax(band_probs[0])
     band_size = idx_to_band.get(band_class, "Unknown Band")
     # Round first, then clamp between 1 and 7
-    raw_cup = cup_pred[0][0]
-rounded_cup = round(raw_cup)
+    cup_numeric = max(1, min(7, round(cup_pred[0][0])))
+    cup_letter = cup_letters.get(cup_numeric, f"Unknown({cup_numeric})")
 
-if rounded_cup < 1:
-    cup_letter = 'A'
-elif rounded_cup > 7:
-    cup_letter = 'F'
-else:
-    cup_letter = cup_letters[rounded_cup]
     # Display result
     st.markdown(f"""
     <div style='
